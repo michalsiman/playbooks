@@ -2,13 +2,16 @@
 - name: Aktualizace systému přes sudo
   hosts: linux_servers
   become: yes  # spustí všechny úlohy s oprávněním root (sudo)
+  ansible_become_method: sudo
   tasks:
     - name: Spustit apt update
       apt:
         update_cache: yes
       become: yes
+      ansible_become_method: sudo
 
     - name: Spustit apt upgrade
       apt:
         upgrade: dist
       become: yes
+      ansible_become_method: sudo
