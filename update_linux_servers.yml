@@ -1,6 +1,6 @@
 ---
 - name: Aktualizace systému přes sudo
-  hosts: raspberries
+  hosts: linux_servers
   become: yes  # spustí všechny úlohy s oprávněním root (sudo)
   tasks:
     - name: Spustit apt update
