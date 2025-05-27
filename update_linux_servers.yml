@@ -1,12 +1,14 @@
 ---
-- name: Aktualizace systému
-  hosts: linux_servers
-  become: yes
+- name: Aktualizace systému přes sudo
+  hosts: raspberries
+  become: yes  # spustí všechny úlohy s oprávněním root (sudo)
   tasks:
-    - name: Update balíčků (apt update)
+    - name: Spustit apt update
       apt:
         update_cache: yes
+      become: yes
 
-    - name: Upgrade balíčků (apt upgrade)
+    - name: Spustit apt upgrade
       apt:
         upgrade: dist
+      become: yes
