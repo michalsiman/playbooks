@@ -1,1 +1,12 @@
-test
+---
+- name: Aktualizace systému
+  hosts: dooropeners
+  become: yes
+  tasks:
+    - name: Update balíčků (apt update)
+      apt:
+        update_cache: yes
+
+    - name: Upgrade balíčků (apt upgrade)
+      apt:
+        upgrade: dist
