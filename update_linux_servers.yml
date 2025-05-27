@@ -1,6 +1,6 @@
 ---
 - name: Aktualizace systému
-  hosts: linuxservers
+  hosts: linux_servers
   become: yes
   tasks:
     - name: Update balíčků (apt update)
