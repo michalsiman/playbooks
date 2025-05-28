@@ -4,6 +4,10 @@
   become: yes
   tasks:
 
+    - name: Ensure python3-apt is installed
+      raw: sudo apt-get update && sudo apt-get install -y python3-apt
+      changed_when: false
+  
     - name: Check current user
       command: whoami
       register: whoami_output
