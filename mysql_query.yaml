@@ -1,0 +1,17 @@
+---
+- name: Run MySQL query
+  hosts: all
+  become: yes
+  vars:
+    mysql_user: "{{ mysql_intranet_user }}"
+    mysql_password: "{{ mysql_intranet_password }}"
+    mysql_query: "{{ mysql_query }}"
+  tasks:
+    - name: Run MySQL query
+      ansible.builtin.shell: |
+        mysql -u {{ mysql_user }} -p{{ mysql_password }} -e "{{ mysql_query }}"
+      register: query_result
+
+    - name: Show query output
+      debug:
+        var: query_result.stdout
