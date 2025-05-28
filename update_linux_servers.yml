@@ -4,6 +4,10 @@
   become: yes
   tasks:
 
+    - name: Check current user
+      command: whoami
+      register: whoami_output
+      
     - name: Update apt cache
       become: yes
       apt:
