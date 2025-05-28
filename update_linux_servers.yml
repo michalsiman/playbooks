@@ -1,14 +1,14 @@
 ---
-- name: Aktualizace systému přes sudo
+- name: Linux server system update
   hosts: linux_servers
-  become: yes  # spustí všechny úlohy s oprávněním root (sudo)
+  become: yes
   tasks:
-    - name: Spustit apt update
+    - name: Run update
       apt:
         update_cache: yes
       become: yes
 
-    - name: Spustit apt upgrade
+    - name: Run upgrade
       apt:
         upgrade: dist
       become: yes
