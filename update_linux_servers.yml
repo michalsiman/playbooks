@@ -1,14 +1,19 @@
 ---
-- name: Linux server system update
+- name: Update Ubuntu system
   hosts: linux_servers
   become: yes
   tasks:
-    - name: Run update
+
+    - name: Update apt cache
       apt:
         update_cache: yes
-      become: yes
+        cache_valid_time: 3600
 
-    - name: Run upgrade
+    - name: Upgrade all packages to the latest version
       apt:
         upgrade: dist
-      become: yes
+
+    - name: Remove unused packages
+      apt:
+        autoremove: yes
+        purge: yes
