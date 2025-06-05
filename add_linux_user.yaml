@@ -1,0 +1,28 @@
+---
+
+- name: Vytvoření uživatele s kontrolou passlib
+  hosts: all
+  become: yes
+  vars:
+    username: "{{ user_input_name }}"
+    password_plain: "{{ user_input_password }}"
+
+  pre_tasks:
+    - name: Zkontroluj, zda je nainstalovaný modul passlib
+      ansible.builtin.pip:
+        name: passlib
+        state: present
+      become: yes
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Vytvoření uživatele {{ username }}
+      ansible.builtin.user:
+        name: "{{ username }}"
+        comment: "Založeno přes Ansible"
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+        create_home: yes
+        password: "{{ password_plain | password_hash('sha512') }}"
